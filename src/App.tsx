@@ -92,8 +92,12 @@ export default function App() {
   const [highScore, setHighScore] = useState(0);
 
   useEffect(() => {
-    const saved = localStorage.getItem('conjunction-highscore');
-    if (saved) setHighScore(parseInt(saved));
+    try {
+      const saved = localStorage.getItem('conjunction-highscore');
+      if (saved) setHighScore(parseInt(saved));
+    } catch (e) {
+      console.warn('LocalStorage access denied:', e);
+    }
   }, []);
 
   const handleStart = () => {
@@ -111,11 +115,16 @@ export default function App() {
     const correct = option === QUESTIONS[currentIndex].answer;
     
     if (correct) {
-      setScore(s => s + 10);
+      const newScore = score + 10;
+      setScore(newScore);
       setShowFeedback('correct');
-      if (score + 10 > highScore) {
-        setHighScore(score + 10);
-        localStorage.setItem('conjunction-highscore', (score + 10).toString());
+      if (newScore > highScore) {
+        setHighScore(newScore);
+        try {
+          localStorage.setItem('conjunction-highscore', newScore.toString());
+        } catch (e) {
+          console.warn('Could not save high score:', e);
+        }
       }
     } else {
       setShowFeedback('wrong');
