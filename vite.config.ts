@@ -6,7 +6,7 @@ import {defineConfig, loadEnv} from 'vite';
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
   return {
-    base: '/', // Use absolute root path for reliability
+    base: './', // Relative paths work best for GitHub Pages subfolders
     plugins: [react(), tailwindcss()],
     build: {
       outDir: 'dist',

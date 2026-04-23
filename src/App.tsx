@@ -80,6 +80,62 @@ const QUESTIONS: Question[] = [
     options: ["and", "but", "if", "or"],
     answer: "if",
     explanation: "'If' is a conjunction used for a condition."
+  },
+  {
+    id: 9,
+    start: "I don't like broccoli",
+    end: "do I like spinach.",
+    options: ["and", "but", "nor", "or"],
+    answer: "nor",
+    explanation: "'Nor' is used to connect two negative ideas together."
+  },
+  {
+    id: 10,
+    start: "It was a long journey,",
+    end: "they arrived safely.",
+    options: ["yet", "so", "or", "and"],
+    answer: "yet",
+    explanation: "'Yet' functions like 'but', showing something unexpected happened."
+  },
+  {
+    id: 11,
+    start: "We can go to the zoo",
+    end: "to the park.",
+    options: ["and", "but", "either", "or"],
+    answer: "or",
+    explanation: "Use 'or' to present a choice between two alternatives."
+  },
+  {
+    id: 12,
+    start: "I brought my umbrella",
+    end: "it was forecast to rain.",
+    options: ["so", "but", "because", "and"],
+    answer: "because",
+    explanation: "The forecast was the reason I brought the umbrella."
+  },
+  {
+    id: 13,
+    start: "The dog barked loudly",
+    end: "the postman arrived.",
+    options: ["when", "but", "so", "or"],
+    answer: "when",
+    explanation: "'When' is a conjunction used to talk about time."
+  },
+  {
+    id: 14,
+    start: "You should brush your teeth",
+    end: "you go to bed.",
+    options: ["after", "before", "so", "and"],
+    answer: "before",
+    explanation: "'Before' connects the sequence of two events."
+  },
+  {
+    id: 15,
+    start: "I'll help you",
+    end: "you help me.",
+    options: ["so", "and", "provided", "but"],
+    answer: "provided",
+    explanation: "'Provided (that)' means only if a specific condition is met."
   }
 ];
 
@@ -304,7 +360,7 @@ export default function App() {
                 onClick={() => checkAnswer(option)}
                 disabled={showFeedback !== 'none'}
                 className={`
-                  group rounded-3xl p-8 transition-all relative border-4 border-transparent
+                  group rounded-3xl p-6 md:p-8 transition-all relative border-4 border-transparent flex items-center justify-center
                   ${color.bg} ${color.shadow} ${color.hoverShadow}
                   ${showFeedback !== 'none' && selectedOption !== option ? 'opacity-30 grayscale cursor-not-allowed translate-y-2 shadow-none' : ''}
                   ${showFeedback === 'correct' && selectedOption === option ? 'border-white ring-8 ring-emerald-100 ring-opacity-50' : ''}
@@ -312,7 +368,9 @@ export default function App() {
                   ${showFeedback === 'none' ? 'hover:translate-y-1' : ''}
                 `}
               >
-                <span className="block text-white font-black text-4xl uppercase tracking-tighter transition-transform group-hover:scale-110">
+                <span className={`block text-white font-black uppercase tracking-tighter transition-transform group-hover:scale-110 ${
+                  option.length > 6 ? 'text-2xl md:text-3xl' : 'text-3xl md:text-4xl'
+                }`}>
                   {option}
                 </span>
               </motion.button>
